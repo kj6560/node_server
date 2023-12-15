@@ -20,3 +20,8 @@ steps to deploy on nginx:<br>
 <br>
 --- restart nginx<br>
     sudo service nginx restart<br>
+--- to keep running node js server in background<br>
+    sudo npm install forever -g<br>
+    sudo npm start app.js<br>
+--- to stop running node js server<br>
+    sudo npm stop app.js<br>
