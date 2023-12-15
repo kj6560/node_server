@@ -1,22 +1,22 @@
-steps to deploy on nginx:
+steps to deploy on nginx:<br>
 
----remove default settings
-    sudo rm /etc/nginx/sites-enabled/default
----create a new site settings
-    sudo nano /etc/nginx/sites-available/node
----paste the below code
-    server {
-    listen 80;
-    server_name example.com;
+---remove default settings<br>
+    sudo rm /etc/nginx/sites-enabled/default<br>
+---create a new site settings<br>
+    sudo nano /etc/nginx/sites-available/node<br>
+---paste the below code<br>
+    server {<br>
+    listen 80;<br>
+    server_name example.com;<br>
 
-    location / {
-        proxy_set_header   X-Forwarded-For $remote_addr;
-        proxy_set_header   Host $http_host;
-        proxy_pass         "http://127.0.0.1:1337";
-    }
-}
----add the above settings to  sites enabled
-    sudo ln -s /etc/nginx/sites-available/node /etc/nginx/sites-enabled/node
-
---- restart nginx
-    sudo service nginx restart
+    location / {<br>
+        proxy_set_header   X-Forwarded-For $remote_addr;<br>
+        proxy_set_header   Host $http_host;<br>
+        proxy_pass         "http://127.0.0.1:1337";<br>
+    }<br>
+}<br>
+---add the above settings to  sites enabled<br>
+    sudo ln -s /etc/nginx/sites-available/node /etc/nginx/sites-enabled/node<br>
+<br>
+--- restart nginx<br>
+    sudo service nginx restart<br>
