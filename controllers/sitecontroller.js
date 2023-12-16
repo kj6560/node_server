@@ -5,7 +5,7 @@ const SiteController = {
     },
 
     uploadFile(req, res) {
-        return res.redirect('/');
+        return res.render('index', { "name": "keshav" });
     }
 }
 module.exports = SiteController;
