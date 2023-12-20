@@ -1,19 +1,16 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-const api = require('./routes/api');
-const web = require('./routes/web');
-
-const helmet = require('helmet');
-
+import { router } from '../web_server/routes/api.js';
+import helmet from 'helmet';
 app.use(helmet());
 app.use(express.json());
 app.disable('x-powered-by');
 
 
-app.set('view engine', 'ejs');
+//app.set('view engine', 'ejs');
 
-app.use('/api/v1', api);
-app.use('/',web);
+app.use('/api/v1', router);
+//app.use('/',web);
 
 
 

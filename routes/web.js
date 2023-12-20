@@ -11,4 +11,4 @@ router.post('/uploadFile', upload.single('file'),(req, res) => {
     SiteController.uploadFile(req, res);
 });
 
-module.exports = router;
+module.exports = web_router;

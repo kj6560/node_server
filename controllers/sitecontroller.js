@@ -5,6 +5,7 @@ const SiteController = {
     },
 
     uploadFile(req, res) {
+        // make entry in database
         return res.redirect('/');
     }
 }
