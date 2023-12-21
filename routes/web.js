@@ -1,14 +1,13 @@
-const express = require('express');
-const upload = require('../upload');
-const router = express.Router();
+import  express  from 'express';
+const web = express.Router();
 
-const SiteController = require('../controllers/sitecontroller')
+import {SiteController} from '../../web_server/controllers/sitecontroller.js';
 
-router.get('/', (req, res) => {
+web.get('/', (req, res) => {
     SiteController.index(req, res);
 });
-router.post('/uploadFile', upload.single('file'),(req, res) => {
-    SiteController.uploadFile(req, res);
-});
+// web.post('/uploadFile', upload.single('file'),(req, res) => {
+//     SiteController.uploadFile(req, res);
+// });
 
-module.exports = web_router;
+export {web}; 

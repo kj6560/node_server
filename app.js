@@ -1,6 +1,7 @@
 import express from 'express';
 import passport from 'passport';
 import { router } from '../web_server/routes/api.js';
+import { web } from '../web_server/routes/web.js';
 import authRoutes from '../web_server/routes/auth.js';
 import helmet from 'helmet';
 import session from 'express-session'; // Import express-session
@@ -20,11 +21,11 @@ app.use(session({ // Add express-session middleware
 app.use(passport.initialize());
 app.use(passport.session());
 
-//app.set('view engine', 'ejs');
+app.set('view engine', 'ejs');
 
 app.use('/auth', authRoutes);
 app.use('/api/v1', router);
-//app.use('/',web);
+app.use('/',web);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

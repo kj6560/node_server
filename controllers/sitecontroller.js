@@ -9,4 +9,4 @@ const SiteController = {
         return res.redirect('/');
     }
 }
-module.exports = SiteController;
+export { SiteController };
