@@ -1,7 +1,7 @@
 import  express  from 'express';
 const web = express.Router();
 
-import {SiteController} from '../../web_server/controllers/sitecontroller.js';
+import {SiteController} from '../../instant_sports/controllers/sitecontroller.js';
 
 web.get('/', (req, res) => {
     SiteController.index(req, res);

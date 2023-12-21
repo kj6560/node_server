@@ -1,5 +1,5 @@
 {
-  "name": "web_server",
+  "name": "instant_sports",
   "version": "1.0.0",
   "description": "created to test deployment of a node based web application",
   "main": "app.js",

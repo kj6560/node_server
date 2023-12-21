@@ -1,8 +1,8 @@
 import express from 'express';
 import passport from 'passport';
-import { router } from '../web_server/routes/api.js';
-import { web } from '../web_server/routes/web.js';
-import authRoutes from '../web_server/routes/auth.js';
+import { router } from '../instant_sports/routes/api.js';
+import { web } from '../instant_sports/routes/web.js';
+import authRoutes from '../instant_sports/routes/auth.js';
 import helmet from 'helmet';
 import session from 'express-session'; // Import express-session
 

@@ -1,7 +1,7 @@
 // models/User.js
 import bcrypt from 'bcryptjs';
 
-import { sequelize } from '../../web_server/configs/db.js';
+import { sequelize } from '../../instant_sports/configs/db.js';
 import { DataTypes } from 'sequelize';
 const User = sequelize.define('user', {
     email: { type: DataTypes.STRING },
