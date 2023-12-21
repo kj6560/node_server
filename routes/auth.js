@@ -1,6 +1,6 @@
 // routes/auth.js
 import express from 'express';
-import { generateToken } from '../authMiddleware.js';
+import { generateToken } from '../../web_server/configs/authMiddleware.js';
 import User from '../models/user.js';
 
 

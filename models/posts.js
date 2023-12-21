@@ -1,5 +1,5 @@
 import { Sequelize, DataTypes } from 'sequelize';
-import { sequelize } from '../../web_server/db.js';
+import { sequelize } from '../../web_server/configs/db.js';
 const Post = sequelize.define('posts', {
   post_created_by: DataTypes.INTEGER,
   post_created_at: DataTypes.DATE,
