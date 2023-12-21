@@ -1,47 +1,30 @@
-const db = require('../db'); 
+// models/User.js
+import bcrypt from 'bcryptjs';
 
-const User = {
-    getAll(callback) {
-        db.query('SELECT * FROM users', callback);
+import { sequelize } from '../../web_server/db.js';
+import { DataTypes } from 'sequelize';
+const User = sequelize.define('user', {
+    email: { type: DataTypes.STRING },
+    password: { type: DataTypes.STRING },
+    first_name: { type: DataTypes.STRING },
+    last_name: { type: DataTypes.STRING },
+    user_role: { type: DataTypes.INTEGER },
+    updated_at: {
+        type: DataTypes.DATE,
     },
+    created_at: {
+        type: DataTypes.DATE,
+    }
+}, { tableName: 'users',timestamps: false });
+// Hash password before saving
+User.beforeCreate(async (user) => {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.password, salt);
+});
 
-    getById(id, callback) {
-        db.query('SELECT * FROM users WHERE id = ?', [id], (err, result) => {
-            if (err) {
-                callback(err, null);
-            } else {
-                callback(null, result[0]);
-            }
-        });
-    },
-
-    create(newUser, callback) {
-        db.query('INSERT INTO users SET ?', newUser, (err, result) => {
-            if (err) {
-                callback(err, null);
-            } else {
-                const createdUser = { id: result.insertId, ...newUser };
-                callback(null, createdUser);
-            }
-        });
-    },
-
-    update(id, updatedUser, callback) {
-        db.query('UPDATE users SET ? WHERE id = ?', [updatedUser, id], (err, result) => {
-            if (err) {
-                callback(err, null);
-            } else if (result.affectedRows === 0) {
-                callback(null, null);
-            } else {
-                const user = { id, ...updatedUser };
-                callback(null, user);
-            }
-        });
-    },
-
-    delete(id, callback) {
-        db.query('DELETE FROM users WHERE id = ?', [id], callback);
-    },
+// Compare password
+User.prototype.isValidPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
 };
 
-module.exports = User;
+export default User;
