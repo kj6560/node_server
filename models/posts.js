@@ -55,6 +55,19 @@ const Likes = sequelize.define('likes', {
   }
 }, { timestamps: false });
 
+const User = sequelize.define('user', {
+  email: { type: DataTypes.STRING },
+  password: { type: DataTypes.STRING },
+  first_name: { type: DataTypes.STRING },
+  last_name: { type: DataTypes.STRING },
+  user_role: { type: DataTypes.INTEGER },
+  updated_at: {
+      type: DataTypes.DATE,
+  },
+  created_at: {
+      type: DataTypes.DATE,
+  }
+}, { tableName: 'users',timestamps: false });
 
 Post.hasMany(PostMedia, { foreignKey: 'post_id' }); // Assuming 'post_id' is the foreign key in PostMedia
 PostMedia.belongsTo(Post, { foreignKey: 'post_id' });
@@ -65,5 +78,6 @@ Comments.belongsTo(Post, { foreignKey: 'post_id' });
 
 Post.hasMany(Likes, { foreignKey: 'post_id' });
 Likes.belongsTo(Post, { foreignKey: 'post_id' });
+
 
 export { Post, PostMedia, Comments, Likes };
