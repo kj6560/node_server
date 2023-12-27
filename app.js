@@ -24,6 +24,7 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 
 app.use('/auth', authRoutes);
+
 app.use('/api/v1', router);
 app.use('/',web);
 
