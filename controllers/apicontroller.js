@@ -39,7 +39,7 @@ const ApiController = {
             }
             const posts = await Post.findAll(query);
 
-            res.json({ posts, total_data, perpage, current_page, total_pages });
+            res.json(posts);
         } catch (error) {
             console.error(error);
             

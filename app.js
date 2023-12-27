@@ -4,7 +4,7 @@ import { router } from '../instant_sports/routes/api.js';
 import { web } from '../instant_sports/routes/web.js';
 import authRoutes from '../instant_sports/routes/auth.js';
 import helmet from 'helmet';
-import session from 'express-session'; // Import express-session
+import session from 'express-session'; 
 
 
 const app = express();
@@ -12,8 +12,8 @@ app.use(helmet());
 app.use(express.json());
 app.disable('x-powered-by');
 
-app.use(session({ // Add express-session middleware
-  secret: 'keshav_univ', // Replace with your secret key
+app.use(session({ 
+  secret: 'keshav_univ', 
   resave: false,
   saveUninitialized: false
 }));
