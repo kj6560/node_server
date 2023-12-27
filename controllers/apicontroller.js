@@ -65,7 +65,7 @@ const ApiController = {
                     groupedPosts[post.id].comments.push({
                         id: post.comment_id,
                         comment: post.comment,
-                        comment_by: post.comment_by,
+                        comment_by: post.comment_by_username,
                         is_parent: post.is_parent,
                         parent_id: post.parent_id,
                         is_available: post.is_available,
@@ -78,7 +78,7 @@ const ApiController = {
                 if (post.like_id && !existingLike) {
                     groupedPosts[post.id].likes.push({
                         id: post.like_id,
-                        liked_by: post.liked_by,
+                        liked_by: post.liked_by_username,
                         created_at: post.like_created_at
                     });
                 }
