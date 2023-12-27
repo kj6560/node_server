@@ -5,8 +5,7 @@ import { web } from '../instant_sports/routes/web.js';
 import authRoutes from '../instant_sports/routes/auth.js';
 import helmet from 'helmet';
 import session from 'express-session'; 
-import https from 'https';
-import fs from 'fs';
+
 
 const app = express();
 app.use(helmet());
@@ -28,17 +27,7 @@ app.use('/auth', authRoutes);
 app.use('/api/v1', router);
 app.use('/',web);
 
-const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/univsportatech.com/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/univsportatech.com/cert.pem'),
-
-};
-const server = https.createServer(options, app);
-// const PORT = process.env.PORT || 4000;
-// app.listen(PORT, () => {
-//   console.log(`Server running on port ${PORT}`);
-// });
-
-server.listen(4000, () => {
-  console.log('Server running on https://univsportatech.com:4000');
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
