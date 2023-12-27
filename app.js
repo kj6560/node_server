@@ -6,6 +6,7 @@ import authRoutes from '../instant_sports/routes/auth.js';
 import helmet from 'helmet';
 import session from 'express-session'; 
 import https from 'https';
+import fs from 'fs';
 
 const app = express();
 app.use(helmet());
@@ -28,8 +29,8 @@ app.use('/api/v1', router);
 app.use('/',web);
 
 const options = {
-  key: fs.readFileSync('/univsportatech.com/privkey.pem'),
-  cert: fs.readFileSync('/univsportatech.com/cert.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/univsportatech.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/univsportatech.com/cert.pem'),
 
 };
 const server = https.createServer(options, app);
