@@ -6,6 +6,7 @@ const ApiController = {
             const posts = await sequelize.query(
                 'SELECT posts.id AS id, ' +
                 'posts.post_created_by AS post_created_by, ' +
+                'pu.user_name AS post_created_by_username, ' +
                 'posts.post_created_at AS post_created_at, ' +
                 'posts.post_caption AS post_caption, ' +
                 'posts.post_type AS post_type, ' +
@@ -25,6 +26,7 @@ const ApiController = {
                 'com_user.user_name as comment_by_username, ' +
                 'liked_user.user_name as liked_by_username ' + // Removed trailing comma
                 'FROM posts ' +
+                'INNER JOIN users AS pu ON posts.post_created_by = pu.id ' +
                 'LEFT JOIN post_media AS pm ON posts.id = pm.post_id ' +
                 'LEFT JOIN comments AS c ON posts.id = c.post_id ' +
                 'LEFT JOIN users as com_user ON c.comment_by = com_user.id ' +
@@ -44,6 +46,7 @@ const ApiController = {
                     groupedPosts[post.id] = {
                         id: post.id,
                         post_created_by: post.post_created_by,
+                        post_created_by_username: post.post_created_by_username, // Added username property
                         post_created_at: post.post_created_at,
                         post_caption: post.post_caption,
                         post_type: post.post_type,
@@ -66,6 +69,7 @@ const ApiController = {
                         id: post.comment_id,
                         comment: post.comment,
                         comment_by: post.comment_by_username,
+                        comment_by_id: post.comment_by, // Added comment_by_id property
                         is_parent: post.is_parent,
                         parent_id: post.parent_id,
                         is_available: post.is_available,
