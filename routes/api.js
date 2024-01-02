@@ -8,4 +8,8 @@ router.post('/posts', verifyToken,(req, res) => {
   ApiController.getPosts(req, res);
 });
 
+router.post('/getUsers', verifyToken,(req, res) => {
+  ApiController.getUsers(req, res);
+});
+
 export {router}; 

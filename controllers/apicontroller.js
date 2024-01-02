@@ -24,14 +24,14 @@ const ApiController = {
                 'l.liked_by AS liked_by, ' +
                 'l.created_at AS like_created_at, ' +
                 'com_user.user_name as comment_by_username, ' +
-                'liked_user.user_name as liked_by_username ' + 
+                'liked_user.user_name as liked_by_username ' +
                 'FROM posts ' +
                 'INNER JOIN users AS pu ON posts.post_created_by = pu.id ' +
                 'LEFT JOIN post_media AS pm ON posts.id = pm.post_id ' +
                 'LEFT JOIN comments AS c ON posts.id = c.post_id ' +
                 'LEFT JOIN users as com_user ON c.comment_by = com_user.id ' +
                 'LEFT JOIN likes AS l ON posts.id = l.post_id ' +
-                'LEFT JOIN users as liked_user ON l.liked_by = liked_user.id ' + 
+                'LEFT JOIN users as liked_user ON l.liked_by = liked_user.id ' +
                 'WHERE posts.is_available = :is_available ' +
                 'ORDER BY posts.id',
                 {
@@ -46,13 +46,13 @@ const ApiController = {
                     groupedPosts[post.id] = {
                         id: post.id,
                         post_created_by: post.post_created_by,
-                        post_created_by_username: post.post_created_by_username, 
+                        post_created_by_username: post.post_created_by_username,
                         post_created_at: post.post_created_at,
                         post_caption: post.post_caption,
                         post_type: post.post_type,
                         post_media: [],
                         comments: [],
-                        likes: [] 
+                        likes: []
                     };
                 }
 
@@ -69,7 +69,7 @@ const ApiController = {
                         id: post.comment_id,
                         comment: post.comment,
                         comment_by: post.comment_by_username,
-                        comment_by_id: post.comment_by, 
+                        comment_by_id: post.comment_by,
                         is_parent: post.is_parent,
                         parent_id: post.parent_id,
                         is_available: post.is_available,
@@ -77,7 +77,7 @@ const ApiController = {
                     });
                 }
 
-                
+
                 const existingLike = groupedPosts[post.id].likes.find(like => like.id === post.like_id);
                 if (post.like_id && !existingLike) {
                     groupedPosts[post.id].likes.push({
@@ -94,6 +94,24 @@ const ApiController = {
             console.error(error);
             res.status(500).json({ error: 'Unable to fetch posts' });
         }
+    },
+    async getUsers(req, res) {
+        try {
+            const user_name = req.body.user_name;
+
+            const users = await sequelize.query(
+                "SELECT id, user_name, first_name, last_name, email FROM users WHERE user_name LIKE :user_name ORDER BY id DESC",
+                {
+                    replacements: { user_name: `%${user_name}%` },
+                    type: sequelize.QueryTypes.SELECT
+                }
+            );
+            console.log(users);
+            res.json(users);
+        } catch (error) {
+            console.log(error);
+        }
+
     },
 };
 
