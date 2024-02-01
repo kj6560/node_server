@@ -13,11 +13,11 @@ app.use(express.json());
 app.disable('x-powered-by');
 
 app.use(session({ 
-  secret: 'keshav_univ', 
+  secret: 'keshav_myshop', 
   resave: false,
   saveUninitialized: false
 }));
-
+app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 

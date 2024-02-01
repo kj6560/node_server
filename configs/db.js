@@ -1,9 +1,10 @@
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize('shiwkes1_project_avish', 'shiwkes1_project_keshav', 'ProAv!@12', {
-  host: '114.69.243.148',
+const sequelize = new Sequelize('myshop', 'root', '', {
+  host: 'localhost',
+  port: 3307,
   dialect: 'mysql',
   logging: false,
-}); 
+});
 
 export {sequelize};

@@ -1,6 +1,7 @@
 import { sequelize } from '../../instant_sports/configs/db.js';
 
 const ApiController = {
+    
     async getPosts(req, res) {
         try {
             const posts = await sequelize.query(
@@ -39,7 +40,6 @@ const ApiController = {
                     type: sequelize.QueryTypes.SELECT
                 }
             );
-
             const groupedPosts = {};
             posts.forEach(post => {
                 if (!groupedPosts[post.id]) {
@@ -87,7 +87,6 @@ const ApiController = {
                     });
                 }
             });
-
             const response = Object.values(groupedPosts);
             res.json(response);
         } catch (error) {
@@ -106,13 +105,14 @@ const ApiController = {
                     type: sequelize.QueryTypes.SELECT
                 }
             );
-            console.log(users);
             res.json(users);
         } catch (error) {
             console.log(error);
         }
 
     },
+    
+
 };
 
 export { ApiController };
